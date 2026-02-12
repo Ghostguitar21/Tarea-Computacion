@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class GameControler : MonoBehaviour
@@ -14,6 +16,8 @@ public class GameControler : MonoBehaviour
     public TextMeshProUGUI pregunta;
     public TextMeshProUGUI[] opciones;
     public int preguntaActualIndex = 0;
+    public GameObject resultadoR;
+    public GameObject resultadoW;
 
     void Start()
     {
@@ -45,14 +49,14 @@ public class GameControler : MonoBehaviour
             if (pregunta.Length >= 8)
             {
                 PreguntasMultiples nuevaPregunta = new PreguntasMultiples(
-                pregunta[0].Trim(),
-                pregunta[1].Trim(),
-                pregunta[2].Trim(),
-                pregunta[3].Trim(),
-                pregunta[4].Trim(),
-                pregunta[5].Trim(),
-                pregunta[6].Trim(),
-                pregunta[7].Trim()
+                pregunta[0],
+                pregunta[1],
+                pregunta[2],
+                pregunta[3],
+                pregunta[4],
+                pregunta[5],
+                pregunta[6],
+                pregunta[7]
                 );
 
                 preguntasMultiples.Add(nuevaPregunta);
@@ -86,16 +90,26 @@ public class GameControler : MonoBehaviour
 
         }
 
-        if (respuesta.Trim() == p.Answer.Trim())
+        if (respuesta == p.Answer)
         {
             Debug.Log("Correcto");
+
+            resultadoR.SetActive(true);
+
+
             siguiente();
         }
-        else {
+        else
+        {
+            resultadoW.SetActive(true);
             Debug.Log("Incorrecto");
+
             siguiente();
         }
     }
+
+
+
     void siguiente()
     {
         preguntaActualIndex++;
@@ -110,4 +124,3 @@ public class GameControler : MonoBehaviour
     }
 
 }
-

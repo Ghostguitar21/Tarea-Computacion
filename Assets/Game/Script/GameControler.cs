@@ -45,14 +45,14 @@ public class GameControler : MonoBehaviour
             if (pregunta.Length >= 8)
             {
                 PreguntasMultiples nuevaPregunta = new PreguntasMultiples(
-                pregunta[0],
-                pregunta[1],
-                pregunta[2],
-                pregunta[3],
-                pregunta[4],
-                pregunta[5],
-                pregunta[6],
-                pregunta[7]
+                pregunta[0].Trim(),
+                pregunta[1].Trim(),
+                pregunta[2].Trim(),
+                pregunta[3].Trim(),
+                pregunta[4].Trim(),
+                pregunta[5].Trim(),
+                pregunta[6].Trim(),
+                pregunta[7].Trim()
                 );
 
                 preguntasMultiples.Add(nuevaPregunta);
@@ -86,13 +86,14 @@ public class GameControler : MonoBehaviour
 
         }
 
-        if (respuesta == p.Answer)
+        if (respuesta.Trim() == p.Answer.Trim())
         {
             Debug.Log("Correcto");
             siguiente();
         }
         else {
             Debug.Log("Incorrecto");
+            siguiente();
         }
     }
     void siguiente()
